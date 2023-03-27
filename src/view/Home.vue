@@ -1,0 +1,51 @@
+<template>
+  <el-container>
+    <el-header>
+        <div class="header">
+            <h1 class="title">南京大学选课系统</h1>
+            <span class="stuName">学生：{{ studentName }}</span>
+        </div>
+    </el-header>
+    <el-container>
+      <!-- <el-aside width="200px">Aside</el-aside> -->
+      <el-main class="main">
+        <router-view></router-view>
+      </el-main>
+    </el-container>
+  </el-container>
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            studentName: '张三'
+        }
+    },
+    methods: {
+
+    }
+}
+</script>
+
+<style>
+.header {
+    width: 100%;
+    height: 100px;
+    background-color: skyblue;
+}
+.title {
+    display:inline-block;
+    margin-left: 40px;
+    font-size: 32px;
+}
+.stuName {
+    float: right;
+    line-height: 100px;
+    margin-right: 20px;
+    font-size: 22px;
+}
+.main {
+    margin-top: 50px;
+}
+</style>
