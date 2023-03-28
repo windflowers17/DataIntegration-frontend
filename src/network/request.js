@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { REQUEST_BASE_URL_DEV, REQUEST_BASE_URL_PROD } from "@/common/const";
+// import { REQUEST_BASE_URL_DEV, REQUEST_BASE_URL_PROD } from "@/common/const";
 
 const instanceNormal = () => {
   let token = sessionStorage.getItem("token");

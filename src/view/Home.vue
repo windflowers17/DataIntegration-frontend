@@ -29,19 +29,18 @@ export default {
 </script>
 
 <style>
-.header {
-    width: 100%;
-    height: 100px;
+.el-header {
     background-color: skyblue;
 }
 .title {
     display:inline-block;
+    line-height: 2px;
     margin-left: 40px;
     font-size: 32px;
 }
 .stuName {
     float: right;
-    line-height: 100px;
+    line-height: 60px;
     margin-right: 20px;
     font-size: 22px;
 }
