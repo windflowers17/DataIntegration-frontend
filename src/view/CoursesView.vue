@@ -16,6 +16,7 @@
       <el-button
         type="primary"
         @click="queryCourses"
+        class="queryButton"
       >查询</el-button>
     </div>
     <div class="courseMsg">
@@ -54,6 +55,18 @@
           prop="place"
           label="地点"
         >
+        </el-table-column>
+        <!-- 操作 -->
+        <el-table-column
+          label="操作"
+        >
+          <template slot-scope="scope">
+            <el-button
+              @click="handleClick(scope.row)"
+              type="text"
+              class="selectButton"
+            >选课</el-button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -134,7 +147,7 @@ export default {
 .institudeQuery {
   margin-left: 30px;
 }
-.el-button {
+.queryButton {
   margin-left: 20px;
 }
 </style>
