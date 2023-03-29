@@ -3,9 +3,10 @@
 //导包
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "@/view/Home.vue"
+import Home from "@/view/Head.vue"
 import CoursesCView from '@/view/CoursesCView.vue'
 import StudentView from '@/view/StudentView.vue'
+import CLogin from '@/view/CLogin.vue'
 
 Vue.use(VueRouter);
 
@@ -15,21 +16,20 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            redirect: '/course'
+            redirect: '/c-login'
         },
         {
-            path: '/home',
-            name: 'enter',
-            component: Home,
-            children: [
-                {
-                    path: '/course', component: CoursesCView
-                },
-                {
-                    path: '/student', component: StudentView
-                },
-            ]
+            path: '/c-login',
+            component: CLogin
         },
+        {
+            path: '/c-course',
+            component: CoursesCView,
+        },
+        {
+            path: '/student',
+            component: StudentView
+        }
     ]
 })
 

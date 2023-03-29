@@ -3,11 +3,12 @@
     <el-header>
         <div class="header">
             <h1 class="title">南京大学选课系统</h1>
-            <span class="stuName">学生：{{ studentName }}</span>
+            <span class="stuName">你好，
+            <span class="stuAccount">{{ acc }}</span>
+            </span>
         </div>
     </el-header>
     <el-container>
-      <!-- <el-aside width="200px">Aside</el-aside> -->
       <el-main class="main">
         <router-view></router-view>
       </el-main>
@@ -17,6 +18,9 @@
 
 <script>
 export default {
+    props: [
+        'acc'
+    ],
     data() {
         return {
             studentName: '张三'
@@ -46,5 +50,9 @@ export default {
 }
 .main {
     margin-top: 50px;
+}
+
+.stuAccount {
+    color: blue;
 }
 </style>

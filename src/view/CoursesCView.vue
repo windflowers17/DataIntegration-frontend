@@ -1,7 +1,8 @@
 <template>
   <div>
+    <Head :acc="account"></Head>
     <div class="institudeQuery">
-      <el-select
+      <!-- <el-select
         v-model="selectedInstitude"
         placeholder="请选择院系"
       >
@@ -17,7 +18,7 @@
         type="primary"
         @click="queryCourses"
         class="queryButton"
-      >查询</el-button>
+      >查询</el-button> -->
     </div>
     <div class="courseMsg">
       <el-table
@@ -72,10 +73,18 @@
 </template>
 
 <script>
+import Head from '@/view/Head.vue'
 import { getAllCoursesFromC, selectCourseFromC } from '@/network/courses/index.js';
-const xml2js =  require('xml2js');
+const xml2js = require('xml2js');
 
 export default {
+  components: {
+    Head,
+  },
+  mounted() {
+    this.queryCourses();
+    this.account = sessionStorage.getItem('acc');
+  },
   data() {
     return {
       courseTable: [
@@ -86,71 +95,64 @@ export default {
         //   credit: '4'
         // },
       ],
-      options: [
-        {
-          value: 'A',
-          label: 'A'
-        },
-        {
-          value: 'B',
-          label: 'B'
-        },
-        {
-          value: 'C',
-          label: 'C'
-        },
-      ],
-      selectedInstitude: ''
+      // options: [
+      //   {
+      //     value: 'A',
+      //     label: 'A'
+      //   },
+      //   {
+      //     value: 'B',
+      //     label: 'B'
+      //   },
+      //   {
+      //     value: 'C',
+      //     label: 'C'
+      //   },
+      // ],
+      // selectedInstitude: ''
+      account: '',
     }
   },
   methods: {
     queryCourses() {
       this.courseTable = [];
-      if (this.selectedInstitude == 'C') {
-        getAllCoursesFromC().then(res => {
-          let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
-          let courses = xmlDoc.getElementsByTagName('课程');
-          for (let i = 0; i < courses.length; ++i) {
-            let course = courses[i];
-            // console.log(course);
-            let item = {
-              number: course.childNodes[0].innerHTML,//编号
-              name: course.childNodes[1].innerHTML,//名称
-              time: course.childNodes[2].innerHTML,//课时
-              credit: course.childNodes[3].innerHTML,//学分
-              teacher: course.childNodes[4].innerHTML,//老师
-              place: course.childNodes[5].innerHTML,
-            }
-            this.courseTable.push(item);
+      getAllCoursesFromC().then(res => {
+        let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
+        let courses = xmlDoc.getElementsByTagName('课程');
+        for (let i = 0; i < courses.length; ++i) {
+          let course = courses[i];
+          // console.log(course);
+          let item = {
+            number: course.childNodes[0].innerHTML,//编号
+            name: course.childNodes[1].innerHTML,//名称
+            time: course.childNodes[2].innerHTML,//课时
+            credit: course.childNodes[3].innerHTML,//学分
+            teacher: course.childNodes[4].innerHTML,//老师
+            place: course.childNodes[5].innerHTML,
           }
-        })
-      }
-      else if (this.selectedInstitude == 'B') {
-
-      }
-      else if (this.selectedInstitude == 'A') {
-
-      }
-      else {
-        alert('error!');
-      }
+          this.courseTable.push(item);
+        }
+      })
     },
     /**
      * 选课操作
      */
     selectCourse(row) {
       console.log(row);
-      let id = row.id;
-      let config = {
-        id: 3001, //TODO: 临时ID
-        course: row.number,
-        grade: 98,
+      let item = {
+        cno: 3001, //TODO: 临时ID
+        sno: row.number,
+        grd: 98,
       }
-      let xml = this.json2Xml(config);
-      console.log(xml);
-      selectCourseFromC(xml).then(res => {
-        alert('选课成功!')
-      })
+      let xml = this.json2Xml(item);
+      let config = {
+        params: {
+          courses_selectionXml: xml
+        }
+      }
+      selectCourseFromC(config);
+
+      alert('选课成功!')
 
     },
     /**
@@ -159,7 +161,7 @@ export default {
      */
     json2Xml(json) {
       let builder = new xml2js.Builder();
-      return builder.buildObject(json);
+      return builder.buildObject({ '选课': json });
     }
 
   }
