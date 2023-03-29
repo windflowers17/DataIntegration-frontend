@@ -5,6 +5,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/view/Home.vue"
 import CoursesView from '@/view/CoursesView.vue'
+import StudentView from '@/view/StudentView.vue'
 
 Vue.use(VueRouter);
 
@@ -24,7 +25,9 @@ const router = new VueRouter({
                 {
                     path: '/course', component: CoursesView
                 },
-
+                {
+                    path: '/student', component: StudentView
+                },
             ]
         },
     ]
