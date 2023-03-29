@@ -57,12 +57,10 @@
         >
         </el-table-column>
         <!-- 操作 -->
-        <el-table-column
-          label="操作"
-        >
+        <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button
-              @click="handleClick(scope.row)"
+              @click="selectCourse(scope.row)"
               type="text"
               class="selectButton"
             >选课</el-button>
@@ -74,7 +72,9 @@
 </template>
 
 <script>
-import { getAllCoursesFromC } from '@/network/courses/index.js';
+import { getAllCoursesFromC, selectCourseFromC } from '@/network/courses/index.js';
+const xml2js =  require('xml2js');
+
 export default {
   data() {
     return {
@@ -135,6 +135,33 @@ export default {
         alert('error!');
       }
     },
+    /**
+     * 选课操作
+     */
+    selectCourse(row) {
+      console.log(row);
+      let id = row.id;
+      let config = {
+        id: 3001, //TODO: 临时ID
+        course: row.number,
+        grade: 98,
+      }
+      let xml = this.json2Xml(config);
+      console.log(xml);
+      selectCourseFromC(xml).then(res => {
+        alert('选课成功!')
+      })
+
+    },
+    /**
+     * 将json转化为xml格式
+     * @param {json} json 
+     */
+    json2Xml(json) {
+      let builder = new xml2js.Builder();
+      return builder.buildObject(json);
+    }
+
   }
 }
 </script>
