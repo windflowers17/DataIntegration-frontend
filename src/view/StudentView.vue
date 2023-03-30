@@ -1,5 +1,6 @@
 <template>
   <div>
+   <Head :acc="account"></Head>
     <el-table
         :data="tableData"
         border
@@ -59,7 +60,11 @@
 </template>
 
 <script>
+import Head from '@/view/Head.vue'
 export default {
+  components: {
+    Head,
+  },
   methods: {
     deleteCourse(row) {
      // console.log(row)
