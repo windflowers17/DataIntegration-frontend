@@ -8,6 +8,8 @@ import CoursesCView from '@/view/CoursesCView.vue'
 import StudentView from '@/view/StudentView.vue'
 import CLogin from '@/view/CLogin.vue'
 
+import BLogin from '@/view/BLogin.vue'
+
 Vue.use(VueRouter);
 
 
@@ -29,6 +31,10 @@ const router = new VueRouter({
         {
             path: '/student',
             component: StudentView
+        },
+        {
+            path: '/b-login',
+            component: BLogin
         }
     ]
 })

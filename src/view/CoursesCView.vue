@@ -1,10 +1,11 @@
 <template>
   <div>
+
     <Head :acc="account"></Head>
     <div class="institudeQuery">
-      <!-- <el-select
+      <el-select
         v-model="selectedInstitude"
-        placeholder="请选择院系"
+        placeholder="请选择查看范围"
       >
         <el-option
           v-for="item in options"
@@ -18,7 +19,7 @@
         type="primary"
         @click="queryCourses"
         class="queryButton"
-      >查询</el-button> -->
+      >查询</el-button>
     </div>
     <div class="courseMsg">
       <el-table
@@ -82,7 +83,7 @@ export default {
     Head,
   },
   mounted() {
-    this.queryCourses();
+    this.loadCoursesFromC();
     this.account = sessionStorage.getItem('acc');
   },
   data() {
@@ -95,26 +96,33 @@ export default {
         //   credit: '4'
         // },
       ],
-      // options: [
-      //   {
-      //     value: 'A',
-      //     label: 'A'
-      //   },
-      //   {
-      //     value: 'B',
-      //     label: 'B'
-      //   },
-      //   {
-      //     value: 'C',
-      //     label: 'C'
-      //   },
-      // ],
-      // selectedInstitude: ''
+      options: [
+        {
+          value: 'C',
+          label: 'C学院'
+        },
+        {
+          value: 'ABC',
+          label: '所有学院'
+        },
+      ],
+      selectedInstitude: 'C',
       account: '',
     }
   },
   methods: {
     queryCourses() {
+      if(selectedInstitude === 'C') {
+        this.loadCoursesFromC();
+      }
+      else if(selectedInstitude === 'ABC') {
+        //TODO: ALL COURSES FROM A B C
+      }
+    },
+    /**
+     * 默认加载C学院的课程
+     */
+    loadCoursesFromC() {
       this.courseTable = [];
       getAllCoursesFromC().then(res => {
         let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
