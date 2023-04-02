@@ -24,6 +24,10 @@ const GET_ALL_COURSES = REQUEST_BASE_URL_ABC + '/integration/showAllcourses'
 // B
 const LOGIN_CHECK_B = REQUEST_BASE_URL_B + '/login'
 
+// A
+const ALL_COURSES_FROM_A = REQUEST_BASE_URL_A + '/courses'
+const SELECT_COURSE_FROM_A = REQUEST_BASE_URL_A + '/courses_selection/add'
+
 
 module.exports = {
     // C
@@ -34,6 +38,9 @@ module.exports = {
 
     // B
     LOGIN_CHECK_B,
-    
+
+    // A
+    ALL_COURSES_FROM_A,
+    SELECT_COURSE_FROM_A,
 
 };

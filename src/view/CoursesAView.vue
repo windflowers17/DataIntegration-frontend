@@ -38,10 +38,6 @@
           width="180"
         >
         </el-table-column>
-        <el-table-column
-          prop="time"
-          label="上课时间"
-        >
         </el-table-column>
         <el-table-column
           prop="credit"
@@ -75,7 +71,7 @@
 
 <script>
 import Head from '@/view/Head.vue'
-import { getAllCoursesFromC, selectCourseFromC, getAllCourses } from '@/network/courses/index.js';
+import { getAllCoursesFromA, selectCourseFromA } from '@/network/courses/index.js';
 const xml2js = require('xml2js');
 
 export default {
@@ -83,7 +79,7 @@ export default {
     Head,
   },
   mounted() {
-    this.loadCoursesFromC();
+    this.loadCoursesFromA();
     this.account = sessionStorage.getItem('acc');
   },
   data() {
@@ -98,27 +94,27 @@ export default {
       ],
       options: [
         {
-          value: 'C',
-          label: 'C学院'
+          value: 'A',
+          label: 'A学院'
         },
         {
           value: 'ABC',
           label: '所有学院'
         },
       ],
-      selectedInstitude: 'C',
+      selectedInstitude: 'A',
       account: '',
     }
   },
   methods: {
     queryCourses() {
-      if (selectedInstitude === 'C') {
-        this.loadCoursesFromC();
+      if (selectedInstitude === 'A') {
+        this.loadCoursesFromA();
       }
       else if (selectedInstitude === 'ABC') {
         //TODO: ALL COURSES FROM A B C
-          getAllCourses().then(res => {
-            this.courseTable = [];
+        getAllCourses().then(res => {
+          this.courseTable = [];
             let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
             let courses = xmlDoc.getElementsByTagName('课程');
             for (let i = 0; i < courses.length; ++i) {
@@ -127,22 +123,21 @@ export default {
               let item = {
                 number: course.childNodes[0].innerHTML,//编号
                 name: course.childNodes[1].innerHTML,//名称
-                time: course.childNodes[2].innerHTML,//课时
                 credit: course.childNodes[3].innerHTML,//学分
                 teacher: course.childNodes[4].innerHTML,//老师
                 place: course.childNodes[5].innerHTML,
               }
               this.courseTable.push(item);
             }
-          })
+        })
       }
     },
     /**
-     * 默认加载C学院的课程
+     * 默认加载A学院的课程
      */
-    loadCoursesFromC() {
+    loadCoursesFromA() {
       this.courseTable = [];
-      getAllCoursesFromC().then(res => {
+      getAllCoursesFromA().then(res => {
         let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
         let courses = xmlDoc.getElementsByTagName('课程');
         for (let i = 0; i < courses.length; ++i) {
@@ -151,10 +146,9 @@ export default {
           let item = {
             number: course.childNodes[0].innerHTML,//编号
             name: course.childNodes[1].innerHTML,//名称
-            time: course.childNodes[2].innerHTML,//课时
-            credit: course.childNodes[3].innerHTML,//学分
-            teacher: course.childNodes[4].innerHTML,//老师
-            place: course.childNodes[5].innerHTML,
+            credit: course.childNodes[2].innerHTML,//学分
+            teacher: course.childNodes[3].innerHTML,//老师
+            place: course.childNodes[4].innerHTML,
           }
           this.courseTable.push(item);
         }
@@ -176,7 +170,7 @@ export default {
           courses_selectionXml: xml
         }
       }
-      selectCourseFromC(config);
+      selectCourseFromA(config);
 
       alert('选课成功!')
 

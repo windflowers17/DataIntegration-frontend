@@ -4,6 +4,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/view/Head.vue"
+import CoursesAView from '@/view/CoursesAView.vue'
 import CoursesCView from '@/view/CoursesCView.vue'
 import StudentView from '@/view/StudentView.vue'
 import CLogin from '@/view/CLogin.vue'
@@ -27,6 +28,10 @@ const router = new VueRouter({
         {
             path: '/c-course',
             component: CoursesCView,
+        },
+        {
+            path: '/a-course',
+            component: CoursesAView,
         },
         {
             path: '/student',
