@@ -1,15 +1,22 @@
 //路由模块
 
 //导包
+// C
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/view/Head.vue"
-import CoursesAView from '@/view/CoursesAView.vue'
 import CoursesCView from '@/view/CoursesCView.vue'
 import StudentView from '@/view/StudentView.vue'
 import CLogin from '@/view/CLogin.vue'
+import CSelectedCourses from '@/view/SelectedCoursesCView.vue'
 
+
+// B
 import BLogin from '@/view/BLogin.vue'
+import CoursesBView from '@/view/CoursesBView.vue'
+
+// A
+import CoursesAView from '@/view/CoursesAView.vue'
 
 Vue.use(VueRouter);
 
@@ -21,6 +28,7 @@ const router = new VueRouter({
             path: '/',
             redirect: '/c-login'
         },
+        // CC
         {
             path: '/c-login',
             component: CLogin
@@ -30,16 +38,26 @@ const router = new VueRouter({
             component: CoursesCView,
         },
         {
-            path: '/a-course',
-            component: CoursesAView,
-        },
-        {
             path: '/student',
             component: StudentView
         },
         {
+            path: '/c-selectedCourses',
+            component: CSelectedCourses
+        },
+        // B
+        {
             path: '/b-login',
             component: BLogin
+        },
+        {
+            path: '/b-course',
+            component: CoursesBView
+        },
+        // A
+        {
+            path: '/a-course',
+            component: CoursesAView
         }
     ]
 })

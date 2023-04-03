@@ -17,12 +17,15 @@ const REQUEST_BASE_URL_ABC = "http://localhost:8081"
 const ALL_COURSES_FROM_C = REQUEST_BASE_URL_C + '/courses'
 const SELECT_COURSE_FROM_C = REQUEST_BASE_URL_C + '/courses_selection/add'
 const LOGIN_CHECK_C = REQUEST_BASE_URL_C + '/login'
-// C获取所有课程信息
-const GET_ALL_COURSES = REQUEST_BASE_URL_ABC + '/integration/showAllcourses'
-
-
+const ALL_SELECTED_COURSES_C = REQUEST_BASE_URL_C + '/courses_selection/searchBySno'
+// C从集成服务器获取所有课程信息
+const GET_ALL_COURSES_C = REQUEST_BASE_URL_ABC + '/integration/CshowAllcourses'
 // B
 const LOGIN_CHECK_B = REQUEST_BASE_URL_B + '/login'
+const ALL_COURSES_FROM_B = REQUEST_BASE_URL_B + '/courses'
+const SELECT_COURSE_FROM_B = REQUEST_BASE_URL_B + '/courses/add'
+// B从集成服务器获取所有课程信息
+const GET_ALL_COURSES_B = REQUEST_BASE_URL_ABC + '/integration/BshowAllcourses'
 
 // A
 const ALL_COURSES_FROM_A = REQUEST_BASE_URL_A + '/courses'
@@ -34,10 +37,14 @@ module.exports = {
     ALL_COURSES_FROM_C,
     SELECT_COURSE_FROM_C,
     LOGIN_CHECK_C,
-    GET_ALL_COURSES,
+    GET_ALL_COURSES_C,
+    ALL_SELECTED_COURSES_C,
 
     // B
     LOGIN_CHECK_B,
+    ALL_COURSES_FROM_B,
+    SELECT_COURSE_FROM_B,
+    GET_ALL_COURSES_B,
 
     // A
     ALL_COURSES_FROM_A,

@@ -108,10 +108,10 @@ export default {
   },
   methods: {
     queryCourses() {
-      if (selectedInstitude === 'A') {
+      if (this.selectedInstitude === 'A') {
         this.loadCoursesFromA();
       }
-      else if (selectedInstitude === 'ABC') {
+      else if (this.selectedInstitude === 'ABC') {
         //TODO: ALL COURSES FROM A B C
         getAllCourses().then(res => {
           this.courseTable = [];

@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <Head :acc="account"></Head>
+    <Head :acc="account" :in="'C'"></Head>
     <div class="institudeQuery">
       <el-select
         v-model="selectedInstitude"
@@ -75,7 +75,7 @@
 
 <script>
 import Head from '@/view/Head.vue'
-import { getAllCoursesFromC, selectCourseFromC } from '@/network/courses/index.js';
+import { CGetAllCourses, getAllCoursesFromC, selectCourseFromC } from '@/network/courses/index.js';
 const xml2js = require('xml2js');
 
 export default {
@@ -112,17 +112,18 @@ export default {
   },
   methods: {
     queryCourses() {
-      if (selectedInstitude === 'C') {
+      if (this.selectedInstitude === 'C') {
         this.loadCoursesFromC();
       }
-      else if (selectedInstitude === 'ABC') {
-        getAllCourses().then(res => {
+      else if (this.selectedInstitude === 'ABC') {
+        CGetAllCourses().then(res => {
+          console.log(res);
           this.courseTable = [];
           let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
+          console.log(xmlDoc);
           let courses = xmlDoc.getElementsByTagName('课程');
           for (let i = 0; i < courses.length; ++i) {
             let course = courses[i];
-            // console.log(course);
             let item = {
               number: course.childNodes[0].innerHTML,//编号
               name: course.childNodes[1].innerHTML,//名称
@@ -163,12 +164,13 @@ export default {
      * 选课操作
      */
     selectCourse(row) {
-      console.log(row);
+      let sno = sessionStorage.getItem('acc');
       let item = {
-        cno: 3001, //TODO: 临时ID
-        sno: row.number,
-        grd: 98,
+        cno: row.number, 
+        sno: sno,
+        grd: 0,
       }
+      console.log(item);
       let xml = this.json2Xml(item);
       let config = {
         params: {

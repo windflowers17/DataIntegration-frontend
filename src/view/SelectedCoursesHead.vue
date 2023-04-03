@@ -20,8 +20,8 @@
     </el-container>
   </el-container>
 </template>
-
-<script>
+  
+  <script>
 export default {
   props: [
     'acc',
@@ -34,20 +34,20 @@ export default {
   },
   methods: {
     showSelectedCourse() {
-        //TODO: router switch
-        switch(this.in) {
-            case 'C': this.$router.push('/c-selectedCourses'); break;
-            //TODO: 待完善
-            // case 'B': this.$router.push('/b-selectedCourses'); break;
-            // case 'A': this.$router.push('/a-selectedCourses'); break;
-            default: console.log('error');
-        }
+      //TODO: router switch
+      switch (this.in) {
+        case 'C': this.$router.push('/c-selectedCourses'); break;
+        //TODO: 待完善
+        // case 'B': this.$router.push('/b-selectedCourses'); break;
+        // case 'A': this.$router.push('/a-selectedCourses'); break;
+        default: console.log('error');
+      }
     }
   }
 }
-</script>
-
-<style>
+  </script>
+  
+  <style>
 .el-header {
   background-color: #0080ff;
 }
