@@ -14,38 +14,48 @@
       >
       </el-table-column>
       <el-table-column
-          prop="name"
-          label="课程名称"
-          width="180"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="time"
-          label="上课时间"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="credit"
-          label="学分"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="teacher"
-          label="老师"
-        >
-        </el-table-column>
-        <el-table-column
-          prop="place"
-          label="地点"
-        >
-        </el-table-column>
+        prop="name"
+        label="课程名称"
+        width="180"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="time"
+        label="上课时间"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="credit"
+        label="学分"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="teacher"
+        label="老师"
+      >
+      </el-table-column>
+      <el-table-column
+        prop="place"
+        label="地点"
+      >
+      </el-table-column>
+      <!-- 退课 -->
+      <el-table-column label="操作">
+        <template slot-scope="scope">
+          <el-button
+            @click="dropCourse(scope.row)"
+            type="text"
+            class="dropButton"
+          >退课 </el-button>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
   
 <script>
 import SelectedCoursesHead from '@/view/SelectedCoursesHead.vue'
-import { CGetSelectedCourses } from '@/network/courses';
+import { CDropCourse, CGetSelectedCourses } from '@/network/courses';
 const xml2js = require('xml2js');
 
 export default {
@@ -72,17 +82,15 @@ export default {
       let xml = this.json2Xml(pack);
       let config = {
         params: {
-            courses_selectionXml: xml
+          snoXml: xml
         }
       }
       CGetSelectedCourses(config).then(res => {
         console.log(res);
         let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
-        let courses = xmlDoc.getElementsByTagName('选课');
-        console.log(courses);
+        let courses = xmlDoc.getElementsByTagName('课程');
         for (let i = 0; i < courses.length; ++i) {
           let course = courses[i];
-          console.log(course);
           let item = {
             number: course.childNodes[0].innerHTML,//编号
             name: course.childNodes[1].innerHTML,//名称
@@ -96,12 +104,33 @@ export default {
       })
     },
     /**
- * 将json转化为xml格式
- * @param {json} json 
- */
+      * 将json转化为xml格式
+      * @param {json} json 
+      */
     json2Xml(json) {
       let builder = new xml2js.Builder();
       return builder.buildObject({ '选课': json });
+    },
+    /**
+     * 退课操作
+     * @param {行} row 
+     */
+    dropCourse(row) {
+      let sno = sessionStorage.getItem('acc');
+      let item = {
+        cno: row.number,
+        sno: sno,
+        // grd: 0,
+      }
+      let xml = this.json2Xml(item);
+      let config = {
+        params: {
+          courses_selectionXml: xml
+        }
+      }
+      CDropCourse(config);
+      alert('退课成功！');
+      location.reload();
     }
   }
 };
