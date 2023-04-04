@@ -17,5 +17,6 @@ export const selectCourseFromB = config => request._get(API.SELECT_COURSE_FROM_B
 export const BGetAllCourses = config => request._get(API.GET_ALL_COURSES_B, config);
 
 // A
+export const ALoginCheck = config => request._get(API.LOGIN_CHECK_A, config);
 export const getAllCoursesFromA = config => request._get(API.ALL_COURSES_FROM_A, config);
 export const selectCourseFromA = config => request._get(API.SELECT_COURSE_FROM_A, config);
