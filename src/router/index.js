@@ -18,6 +18,7 @@ import CoursesBView from '@/view/CoursesBView.vue'
 // A
 import ALogin from '@/view/ALogin.vue'
 import CoursesAView from '@/view/CoursesAView.vue'
+import ASelectedCourses from '@/view/SelectedCoursesAView.vue'
 
 Vue.use(VueRouter);
 
@@ -63,7 +64,11 @@ const router = new VueRouter({
         {
             path: '/a-course',
             component: CoursesAView
-        }
+        },
+        {
+            path: '/a-selectedCourses',
+            component: ASelectedCourses
+        },
     ]
 })
 
