@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <Head :acc="account"></Head>
+    <Head :acc="account" :in="'A'"></Head>
     <div class="institudeQuery">
       <el-select
         v-model="selectedInstitude"
@@ -38,7 +38,6 @@
           width="180"
         >
         </el-table-column>
-        </el-table-column>
         <el-table-column
           prop="credit"
           label="学分"
@@ -68,10 +67,10 @@
     </div>
   </div>
 </template>
-
-<script>
+  
+  <script>
 import Head from '@/view/Head.vue'
-import { getAllCoursesFromA, selectCourseFromA } from '@/network/courses/index.js';
+import { getAllCoursesFromA, AGetAllCourses, selectCourseFromA } from '@/network/courses/index.js';
 const xml2js = require('xml2js');
 
 export default {
@@ -112,23 +111,21 @@ export default {
         this.loadCoursesFromA();
       }
       else if (this.selectedInstitude === 'ABC') {
-        //TODO: ALL COURSES FROM A B C
-        getAllCourses().then(res => {
+        AGetAllCourses().then(res => {
           this.courseTable = [];
-            let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
-            let courses = xmlDoc.getElementsByTagName('课程');
-            for (let i = 0; i < courses.length; ++i) {
-              let course = courses[i];
-              // console.log(course);
-              let item = {
-                number: course.childNodes[0].innerHTML,//编号
-                name: course.childNodes[1].innerHTML,//名称
-                credit: course.childNodes[3].innerHTML,//学分
-                teacher: course.childNodes[4].innerHTML,//老师
-                place: course.childNodes[5].innerHTML,
-              }
-              this.courseTable.push(item);
+          let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
+          let courses = xmlDoc.getElementsByTagName('课程');
+          for (let i = 0; i < courses.length; ++i) {
+            let course = courses[i];
+            let item = {
+              number: course.childNodes[0].innerHTML,//编号
+              name: course.childNodes[1].innerHTML,//名称
+              credit: course.childNodes[3].innerHTML,//学分
+              teacher: course.childNodes[4].innerHTML,//老师
+              place: course.childNodes[5].innerHTML,
             }
+            this.courseTable.push(item);
+          }
         })
       }
     },
@@ -158,11 +155,11 @@ export default {
      * 选课操作
      */
     selectCourse(row) {
-      console.log(row);
+      let sno = sessionStorage.getItem('acc');
       let item = {
-        cno: 3001, //TODO: 临时ID
-        sno: row.number,
-        grd: 98,
+        '课程编号': row.number, 
+        '学生编号': sno,
+        '得分': 0,
       }
       let xml = this.json2Xml(item);
       let config = {
@@ -171,7 +168,6 @@ export default {
         }
       }
       selectCourseFromA(config);
-
       alert('选课成功!')
 
     },
@@ -186,9 +182,9 @@ export default {
 
   }
 }
-</script>
-
-<style>
+  </script>
+  
+  <style>
 .courseMsg {
   margin-top: 20px;
   margin-left: 30px;
