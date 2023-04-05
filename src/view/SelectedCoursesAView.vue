@@ -26,11 +26,6 @@
       >
       </el-table-column>
       <el-table-column
-        prop="time"
-        label="上课时间"
-      >
-      </el-table-column>
-      <el-table-column
         prop="credit"
         label="学分"
       >
@@ -58,7 +53,6 @@
     </el-table>
   </div>
 </template>
-  
 <script>
 import SelectedCoursesHead from '@/view/SelectedCoursesHead.vue'
 import { ADropCourse, AGetSelectedCourses } from '@/network/courses';
@@ -100,10 +94,9 @@ export default {
           let item = {
             number: course.childNodes[0].innerHTML,//编号
             name: course.childNodes[1].innerHTML,//名称
-            time: course.childNodes[2].innerHTML,//课时
-            credit: course.childNodes[3].innerHTML,//学分
-            teacher: course.childNodes[4].innerHTML,//老师
-            place: course.childNodes[5].innerHTML,
+            credit: course.childNodes[2].innerHTML,//学分
+            teacher: course.childNodes[3].innerHTML,//老师
+            place: course.childNodes[4].innerHTML,
           }
           this.courseList.push(item);
         }
@@ -146,11 +139,11 @@ export default {
     }
   }
 };
-</script>
-
-<style scoped>
+  </script>
+  
+  <style scoped>
 ._title {
   margin-left: 20px;
 }
 </style>
-  
+    
