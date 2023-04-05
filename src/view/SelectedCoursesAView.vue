@@ -61,7 +61,7 @@
   
 <script>
 import SelectedCoursesHead from '@/view/SelectedCoursesHead.vue'
-import { CDropCourse, CGetSelectedCourses } from '@/network/courses';
+import { ADropCourse, AGetSelectedCourses } from '@/network/courses';
 const xml2js = require('xml2js');
 
 export default {
@@ -91,7 +91,7 @@ export default {
           snoXml: xml
         }
       }
-      CGetSelectedCourses(config).then(res => {
+      AGetSelectedCourses(config).then(res => {
         console.log(res);
         let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
         let courses = xmlDoc.getElementsByTagName('课程');
@@ -134,7 +134,7 @@ export default {
           courses_selectionXml: xml
         }
       }
-      CDropCourse(config);
+      ADropCourse(config);
       alert('退课成功！');
       location.reload();
     },

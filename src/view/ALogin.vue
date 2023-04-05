@@ -75,7 +75,7 @@ export default {
               user_accountXml: xml
             }
           }
-          CLoginCheck(config).then(res => {
+          ALoginCheck(config).then(res => {
             if (res === "") {
               alert('账户不存在，请先注册！');
               //TODO:跳转注册
