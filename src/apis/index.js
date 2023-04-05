@@ -25,7 +25,7 @@ const GET_ALL_SELECTED_COURSES_C = REQUEST_BASE_URL_ABC + '/integration/CaskCour
 // B
 const LOGIN_CHECK_B = REQUEST_BASE_URL_B + '/login'
 const ALL_COURSES_FROM_B = REQUEST_BASE_URL_B + '/courses'
-const SELECT_COURSE_FROM_B = REQUEST_BASE_URL_B + '/courses/add'
+const SELECT_COURSE_FROM_B = REQUEST_BASE_URL_B + '/courses_selection/add'
 // B从集成服务器获取所有课程信息
 const GET_ALL_COURSES_B = REQUEST_BASE_URL_ABC + '/integration/BshowAllcourses'
 

@@ -86,7 +86,7 @@ export default {
               sessionStorage.setItem('acc', this.loginForm.studentId);
               sessionStorage.setItem('token', token);
               alert('登录成功!');
-              this.$router.push('/c-course');
+              this.$router.push('c-course');
             }
           })
         } else {

@@ -164,9 +164,9 @@ export default {
     selectCourse(row) {
       let sno = sessionStorage.getItem('acc');
       let item = {
-        cno: row.number, 
-        sno: sno,
-        grd: 0,
+        '课程编号': row.number, 
+        '学生编号': sno,
+        '得分': 0,
       }
       let xml = this.json2Xml(item);
       let config = {

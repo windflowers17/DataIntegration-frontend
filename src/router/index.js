@@ -9,7 +9,7 @@ import CoursesCView from '@/view/CoursesCView.vue'
 import StudentView from '@/view/StudentView.vue'
 import CLogin from '@/view/CLogin.vue'
 import CSelectedCourses from '@/view/SelectedCoursesCView.vue'
-
+import BSelectedCourses from '@/view/SelectedCoursesBView.vue'
 
 // B
 import BLogin from '@/view/BLogin.vue'
@@ -53,6 +53,10 @@ const router = new VueRouter({
         {
             path: '/b-course',
             component: CoursesBView
+        },
+        {
+            path: '/b-selectedCourses',
+            component: BSelectedCourses
         },
         // A
         {

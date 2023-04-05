@@ -120,7 +120,6 @@ export default {
           console.log(res);
           this.courseTable = [];
           let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
-          console.log(xmlDoc);
           let courses = xmlDoc.getElementsByTagName('课程');
           for (let i = 0; i < courses.length; ++i) {
             let course = courses[i];
