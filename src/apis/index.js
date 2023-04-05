@@ -26,14 +26,22 @@ const GET_ALL_SELECTED_COURSES_C = REQUEST_BASE_URL_ABC + '/integration/CaskCour
 const LOGIN_CHECK_B = REQUEST_BASE_URL_B + '/login'
 const ALL_COURSES_FROM_B = REQUEST_BASE_URL_B + '/courses'
 const SELECT_COURSE_FROM_B = REQUEST_BASE_URL_B + '/courses_selection/add'
+const DROP_COURSE_B = REQUEST_BASE_URL_B + '/courses_selection/delete'
 // B从集成服务器获取所有课程信息
 const GET_ALL_COURSES_B = REQUEST_BASE_URL_ABC + '/integration/BshowAllcourses'
+// B从集成服务器获取所有已选课程信息
+const GET_ALL_SELECTED_COURSES_B = REQUEST_BASE_URL_ABC + '/integration/BaskCourse'
 
 // A
 const LOGIN_CHECK_A = REQUEST_BASE_URL_A + '/login'
 const ALL_COURSES_FROM_A = REQUEST_BASE_URL_A + '/courses'
 const SELECT_COURSE_FROM_A = REQUEST_BASE_URL_A + '/courses_selection/add'
-
+const ALL_SELECTED_COURSES_A = REQUEST_BASE_URL_A + '/courses_selection/searchBySno'
+const DROP_COURSE_A = REQUEST_BASE_URL_A + '/courses_selection/delete'
+// A从集成服务器获取所有课程信息
+const GET_ALL_COURSES_A = REQUEST_BASE_URL_ABC + '/integration/AshowAllcourses'
+// A从集成服务器获取所有已选课程信息
+const GET_ALL_SELECTED_COURSES_A = REQUEST_BASE_URL_ABC + '/integration/AaskCourse'
 
 module.exports = {
     // C
@@ -50,10 +58,16 @@ module.exports = {
     ALL_COURSES_FROM_B,
     SELECT_COURSE_FROM_B,
     GET_ALL_COURSES_B,
+    GET_ALL_SELECTED_COURSES_B,
+    DROP_COURSE_B,
 
     // A
     LOGIN_CHECK_A,
     ALL_COURSES_FROM_A,
     SELECT_COURSE_FROM_A,
+    ALL_SELECTED_COURSES_A,
+    DROP_COURSE_A,
+    GET_ALL_COURSES_A,
+    GET_ALL_SELECTED_COURSES_A,
 
 };
