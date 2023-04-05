@@ -2,6 +2,12 @@
   <div>
 
     <SelectedCoursesHead :acc="account"></SelectedCoursesHead>
+    <el-button
+      type="primary"
+      plain
+      style="font-size: 20px;margin-left: 20px"
+      @click="rollBack"
+    >返回选课</el-button>
     <h2 class="_title">已选课程</h2>
     <el-table
       :data="courseList"
@@ -130,6 +136,12 @@ export default {
       BDropCourse(config);
       alert('退课成功！');
       location.reload();
+    },
+    /**
+ * 返回选课
+ */
+    rollBack() {
+      this.$router.push('/b-course');
     }
   }
 };
