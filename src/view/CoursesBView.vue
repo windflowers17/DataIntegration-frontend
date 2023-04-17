@@ -125,14 +125,24 @@ export default {
           let courses = xmlDoc.getElementsByTagName('课程');
           for (let i = 0; i < courses.length; ++i) {
             let course = courses[i];
+
+            let index = 1;
+            let isACourse = course.childNodes[0].innerHTML.charAt(0) === '1';
+            let isBCourse = course.childNodes[0].innerHTML.charAt(0) === '2';
+            let share = isACourse ? course.childNodes[5].innerHTML : course.childNodes[6].innerHTML
+            if (!isBCourse && !share) {
+              //来自外院系的课程（A和C）且不共享，则跳过
+              continue;
+            }
             let item = {
               number: course.childNodes[0].innerHTML,//编号
               name: course.childNodes[1].innerHTML,//名称
-              time: course.childNodes[2].innerHTML,//课时
-              credit: course.childNodes[3].innerHTML,//学分
-              teacher: course.childNodes[4].innerHTML,//老师
-              place: course.childNodes[5].innerHTML,
+              time: isACourse ? '/' : course.childNodes[++index].innerHTML,//课时
+              credit: course.childNodes[++index].innerHTML,//学分
+              teacher: course.childNodes[++index].innerHTML,//老师
+              place: course.childNodes[++index].innerHTML,
             }
+
             this.courseTable.push(item);
           }
         })
@@ -149,19 +159,13 @@ export default {
         for (let i = 0; i < courses.length; ++i) {
           let course = courses[i];
 
-          let index = 1;
-          let isACourse = course.childNodes[0].innerHTML.charAt(0) === '1';
-          let share = isACourse ? course.childNodes[5].innerHTML : course.childNodes[6].innerHTML
-          if(!share) {
-            continue;
-          }
           let item = {
             number: course.childNodes[0].innerHTML,//编号
             name: course.childNodes[1].innerHTML,//名称
-            time: isACourse ? '/' : course.childNodes[++index].innerHTML,//课时
-            credit: course.childNodes[++index].innerHTML,//学分
-            teacher: course.childNodes[++index].innerHTML,//老师
-            place: course.childNodes[++index].innerHTML,
+            time: course.childNodes[2].innerHTML,//课时
+            credit: course.childNodes[3].innerHTML,//学分
+            teacher: course.childNodes[4].innerHTML,//老师
+            place: course.childNodes[5].innerHTML,
           }
 
           this.courseTable.push(item);

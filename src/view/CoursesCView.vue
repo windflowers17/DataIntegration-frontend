@@ -128,8 +128,10 @@ export default {
             let course = courses[i];
             let index = 1;
             let isACourse = course.childNodes[0].innerHTML.charAt(0) === '1';
+            let isCCourse = course.childNodes[0].innerHTML.charAt(0) === '3';
             let share = isACourse ? course.childNodes[5].innerHTML : course.childNodes[6].innerHTML
-            if (!share) {
+            if (!isCCourse && !share) {
+              //来自外院系的课程（B和C）且不共享，则跳过
               continue;
             }
             let item = {
