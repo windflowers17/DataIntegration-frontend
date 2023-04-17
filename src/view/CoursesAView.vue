@@ -117,6 +117,7 @@ export default {
           let courses = xmlDoc.getElementsByTagName('课程');
           for (let i = 0; i < courses.length; ++i) {
             let course = courses[i];
+            
             let item = {
               number: course.childNodes[0].innerHTML,//编号
               name: course.childNodes[1].innerHTML,//名称

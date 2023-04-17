@@ -1,7 +1,10 @@
 <template>
   <div>
 
-    <Head :acc="account" :in="'C'"></Head>
+    <Head
+      :acc="account"
+      :in="'C'"
+    ></Head>
     <div class="institudeQuery">
       <el-select
         v-model="selectedInstitude"
@@ -125,6 +128,10 @@ export default {
             let course = courses[i];
             let index = 1;
             let isACourse = course.childNodes[0].innerHTML.charAt(0) === '1';
+            let share = isACourse ? course.childNodes[5].innerHTML : course.childNodes[6].innerHTML
+            if (!share) {
+              continue;
+            }
             let item = {
               number: course.childNodes[0].innerHTML,//编号
               name: course.childNodes[1].innerHTML,//名称
@@ -167,7 +174,7 @@ export default {
     selectCourse(row) {
       let sno = sessionStorage.getItem('acc');
       let item = {
-        cno: row.number, 
+        cno: row.number,
         sno: sno,
         grd: 0,
       }
