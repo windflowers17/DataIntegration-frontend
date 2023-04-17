@@ -124,7 +124,7 @@ export default {
           for (let i = 0; i < courses.length; ++i) {
             let course = courses[i];
             let index = 1;
-            let isACourse = course.childNodes[0].innerHTML.chatAt(0) === '1';
+            let isACourse = course.childNodes[0].innerHTML.charAt(0) === '1';
             let item = {
               number: course.childNodes[0].innerHTML,//编号
               name: course.childNodes[1].innerHTML,//名称
