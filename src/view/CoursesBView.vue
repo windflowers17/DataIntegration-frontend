@@ -1,7 +1,10 @@
 <template>
   <div>
 
-    <Head :acc="account" :in="'B'"></Head>
+    <Head
+      :acc="account"
+      :in="'B'"
+    ></Head>
     <div class="institudeQuery">
       <el-select
         v-model="selectedInstitude"
@@ -145,15 +148,18 @@ export default {
         let courses = xmlDoc.getElementsByTagName('课程');
         for (let i = 0; i < courses.length; ++i) {
           let course = courses[i];
-          // console.log(course);
+
+          let index = 1;
+          let isACourse = course.childNodes[0].innerHTML.chatAt(0) === '1';
           let item = {
             number: course.childNodes[0].innerHTML,//编号
             name: course.childNodes[1].innerHTML,//名称
-            time: course.childNodes[2].innerHTML,//课时
-            credit: course.childNodes[3].innerHTML,//学分
-            teacher: course.childNodes[4].innerHTML,//老师
-            place: course.childNodes[5].innerHTML,
+            time: isACourse ? '/' : course.childNodes[++index].innerHTML,//课时
+            credit: course.childNodes[++index].innerHTML,//学分
+            teacher: course.childNodes[++index].innerHTML,//老师
+            place: course.childNodes[++index].innerHTML,
           }
+
           this.courseTable.push(item);
         }
       })
@@ -164,7 +170,7 @@ export default {
     selectCourse(row) {
       let sno = sessionStorage.getItem('acc');
       let item = {
-        '课程编号': row.number, 
+        '课程编号': row.number,
         '学生编号': sno,
         '得分': 0,
       }

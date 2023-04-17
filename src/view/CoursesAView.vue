@@ -121,8 +121,9 @@ export default {
               number: course.childNodes[0].innerHTML,//编号
               name: course.childNodes[1].innerHTML,//名称
               credit: course.childNodes[3].innerHTML,//学分
-              teacher: course.childNodes[4].innerHTML,//老师
-              place: course.childNodes[5].innerHTML,
+              teacher: course.childNodes[4].innerHTML,//老师course.childNodes[3].innerHTML
+              place: course.childNodes[5].innerHTML, //course.childNodes[4]
+              //course.childNodes[5].innerHTML - 成绩
             }
             this.courseTable.push(item);
           }
