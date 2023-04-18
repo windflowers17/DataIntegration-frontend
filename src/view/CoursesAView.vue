@@ -1,7 +1,10 @@
 <template>
   <div>
 
-    <Head :acc="account" :in="'A'"></Head>
+    <Head
+      :acc="account"
+      :in="'A'"
+    ></Head>
     <div class="institudeQuery">
       <el-select
         v-model="selectedInstitude"
@@ -36,6 +39,11 @@
           prop="name"
           label="课程名称"
           width="180"
+        >
+        </el-table-column>
+        <el-table-column
+          prop="time"
+          label="课时"
         >
         </el-table-column>
         <el-table-column
@@ -117,14 +125,20 @@ export default {
           let courses = xmlDoc.getElementsByTagName('课程');
           for (let i = 0; i < courses.length; ++i) {
             let course = courses[i];
-            
+
+            let index = 1;
+            let isACourse = course.childNodes[0].innerHTML.charAt(0) === '1';
+            // let isBCourse = course.childNodes[0].innerHTML.charAt(0) === '2';
+            let share = isACourse ? course.childNodes[5].innerHTML : course.childNodes[6].innerHTML
+            if(!isACourse && !share) {
+              continue;
+            }
             let item = {
               number: course.childNodes[0].innerHTML,//编号
               name: course.childNodes[1].innerHTML,//名称
-              credit: course.childNodes[3].innerHTML,//学分
-              teacher: course.childNodes[4].innerHTML,//老师course.childNodes[3].innerHTML
-              place: course.childNodes[5].innerHTML, //course.childNodes[4]
-              //course.childNodes[5].innerHTML - 成绩
+              time: isACourse ? '/' : course.childNodes[++index].innerHTML,//课时
+              credit: course.childNodes[++index].innerHTML,//学分
+              teacher: course.childNodes[++index].innerHTML,//老师
             }
             this.courseTable.push(item);
           }
@@ -145,6 +159,7 @@ export default {
           let item = {
             number: course.childNodes[0].innerHTML,//编号
             name: course.childNodes[1].innerHTML,//名称
+            time: '/',//课时
             credit: course.childNodes[2].innerHTML,//学分
             teacher: course.childNodes[3].innerHTML,//老师
             place: course.childNodes[4].innerHTML,
@@ -159,7 +174,7 @@ export default {
     selectCourse(row) {
       let sno = sessionStorage.getItem('acc');
       let item = {
-        '课程编号': row.number, 
+        '课程编号': row.number,
         '学生编号': sno,
         '得分': 0,
       }
