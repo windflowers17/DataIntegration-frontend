@@ -130,7 +130,7 @@ export default {
             let isACourse = course.childNodes[0].innerHTML.charAt(0) === '1';
             let isBCourse = course.childNodes[0].innerHTML.charAt(0) === '2';
             let share = isACourse ? course.childNodes[5].innerHTML : course.childNodes[6].innerHTML
-            if (!isBCourse && !share) {
+            if (!isBCourse && share != '1') {
               //来自外院系的课程（A和C）且不共享，则跳过
               continue;
             }

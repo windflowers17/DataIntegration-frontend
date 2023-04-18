@@ -129,8 +129,8 @@ export default {
             let index = 1;
             let isACourse = course.childNodes[0].innerHTML.charAt(0) === '1';
             // let isBCourse = course.childNodes[0].innerHTML.charAt(0) === '2';
-            let share = isACourse ? course.childNodes[5].innerHTML : course.childNodes[6].innerHTML
-            if(!isACourse && !share) {
+            let share = isACourse ? course.childNodes[5].innerHTML : course.childNodes[6].innerHTML;
+            if(!isACourse && share != '1') {
               continue;
             }
             let item = {
