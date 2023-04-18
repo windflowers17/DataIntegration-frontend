@@ -96,14 +96,19 @@ export default {
         let courses = xmlDoc.getElementsByTagName('课程');
         for (let i = 0; i < courses.length; ++i) {
           let course = courses[i];
+
+          let index = 1;
+          let isACourse = course.childNodes[0].innerHTML.charAt(0) === '1';
+
           let item = {
             number: course.childNodes[0].innerHTML,//编号
             name: course.childNodes[1].innerHTML,//名称
-            time: course.childNodes[2].innerHTML,//课时
-            credit: course.childNodes[3].innerHTML,//学分
-            teacher: course.childNodes[4].innerHTML,//老师
-            place: course.childNodes[5].innerHTML,
+            time: isACourse ? '/' : course.childNodes[++index].innerHTML, //课时
+            credit: course.childNodes[++index].innerHTML,//学分
+            teacher: course.childNodes[++index].innerHTML,//老师
+            place: course.childNodes[++index].innerHTML,
           }
+
           this.courseList.push(item);
         }
       })
