@@ -88,7 +88,7 @@ export default {
       AGetSelectedCourses(config).then(res => {
         console.log(res);
         let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
-        let courses = xmlDoc.getElementsByTagName('选课');
+        let courses = xmlDoc.getElementsByTagName('课程');
         for (let i = 0; i < courses.length; ++i) {
           let course = courses[i];
           let item = {
