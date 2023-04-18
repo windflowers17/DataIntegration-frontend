@@ -42,11 +42,6 @@
         >
         </el-table-column>
         <el-table-column
-          prop="time"
-          label="课时"
-        >
-        </el-table-column>
-        <el-table-column
           prop="credit"
           label="学分"
         >
@@ -126,9 +121,7 @@ export default {
           for (let i = 0; i < courses.length; ++i) {
             let course = courses[i];
 
-            let index = 1;
             let isACourse = course.childNodes[0].innerHTML.charAt(0) === '1';
-            // let isBCourse = course.childNodes[0].innerHTML.charAt(0) === '2';
             let share = isACourse ? course.childNodes[5].innerHTML : course.childNodes[6].innerHTML;
             if(!isACourse && share != '1') {
               continue;
@@ -136,9 +129,9 @@ export default {
             let item = {
               number: course.childNodes[0].innerHTML,//编号
               name: course.childNodes[1].innerHTML,//名称
-              time: isACourse ? '/' : course.childNodes[++index].innerHTML,//课时
-              credit: course.childNodes[++index].innerHTML,//学分
-              teacher: course.childNodes[++index].innerHTML,//老师
+              credit: course.childNodes[2].innerHTML,//学分
+              teacher: course.childNodes[3].innerHTML,//老师
+              place: course.childNodes[4].innerHTML //地点
             }
             this.courseTable.push(item);
           }
@@ -159,7 +152,6 @@ export default {
           let item = {
             number: course.childNodes[0].innerHTML,//编号
             name: course.childNodes[1].innerHTML,//名称
-            time: '/',//课时
             credit: course.childNodes[2].innerHTML,//学分
             teacher: course.childNodes[3].innerHTML,//老师
             place: course.childNodes[4].innerHTML,
