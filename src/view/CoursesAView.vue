@@ -168,8 +168,8 @@ export default {
       let sno = sessionStorage.getItem('acc');
       let item = {
         '课程编号': row.number,
-        '学生编号': sno,
-        '得分': 0,
+        '学号': sno,
+        '成绩': 0,
       }
       let xml = this.json2Xml(item);
       let config = {
