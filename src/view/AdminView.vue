@@ -57,6 +57,8 @@
       <div class="rightSide">
         <CoursesSelectionCount v-if="this.index===1"></CoursesSelectionCount>
         <CoursesNumOfDiffCredits v-if="this.index===2"></CoursesNumOfDiffCredits>
+        <InstituteCount v-if="this.index===3"></InstituteCount>
+        <GradeCount v-if="this.index===4"></GradeCount>
       </div>
     </el-row>
 
@@ -68,6 +70,8 @@
 import Head from '@/view/Head.vue'
 import CoursesNumOfDiffCredits from './charts/CoursesNumOfDiffCredits.vue';
 import CoursesSelectionCount from './charts/CoursesSelectionCount.vue';
+import InstituteCount from './charts/InstituteCount.vue';
+import GradeCount from './charts/GradeCount.vue';
 const xml2js = require('xml2js');
 
 export default {
@@ -75,6 +79,8 @@ export default {
     Head,
     CoursesSelectionCount,
     CoursesNumOfDiffCredits,
+    InstituteCount,
+    GradeCount,
   },
   mounted() {
     sessionStorage.setItem('acc', 'admin'); //TODO: 最后需要删除
