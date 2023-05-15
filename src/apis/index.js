@@ -5,17 +5,17 @@ const REQUEST_BASE_URL_PROD = "http://121.37.247.178:8080"
 
 // const REQUEST_BASE_URL = REQUEST_BASE_URL_DEV
 
-const REQUEST_BASE_URL_A = "http://192.168.43.58:8082"
-const REQUEST_BASE_URL_B = "http://192.168.43.220:8083"
-const REQUEST_BASE_URL_C = "http://192.168.43.26:8084"
-const REQUEST_BASE_URL_ABC = "http://192.168.43.195:8081"
+// const REQUEST_BASE_URL_A = "http://192.168.43.58:8082"
+// const REQUEST_BASE_URL_B = "http://192.168.43.220:8083"
+// const REQUEST_BASE_URL_C = "http://192.168.43.26:8084"
+// const REQUEST_BASE_URL_ABC = "http://192.168.43.195:8081"
 
 
-// const REQUEST_BASE_URL_C = "http://localhost:8084"
-// const REQUEST_BASE_URL_B = "http://localhost:8083"
-// const REQUEST_BASE_URL_A = "http://localhost:8082"
-// // 集成服务器
-// const REQUEST_BASE_URL_ABC = "http://localhost:8081"
+const REQUEST_BASE_URL_C = "http://localhost:8084"
+const REQUEST_BASE_URL_B = "http://localhost:8083"
+const REQUEST_BASE_URL_A = "http://localhost:8082"
+// 集成服务器
+const REQUEST_BASE_URL_ABC = "http://localhost:8081"
 
 // C
 const ALL_COURSES_FROM_C = REQUEST_BASE_URL_C + '/courses'
