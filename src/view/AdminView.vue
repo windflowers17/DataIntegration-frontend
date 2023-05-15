@@ -7,7 +7,7 @@
     ></Head>
     <el-row class="tac">
       <el-col :span="5">
-        <h1>查看图表</h1>
+        <h1 style="margin-left: 22px;">查看图表</h1>
         <el-menu
           default-active="1"
           class="el-menu-vertical-demo"
@@ -55,7 +55,8 @@
         </el-menu>
       </el-col>
       <div class="rightSide">
-        <CoursesSelectionCount v-if="this.index===2"></CoursesSelectionCount>
+        <CoursesSelectionCount v-if="this.index===1"></CoursesSelectionCount>
+        <CoursesNumOfDiffCredits v-if="this.index===2"></CoursesNumOfDiffCredits>
       </div>
     </el-row>
 
@@ -65,6 +66,7 @@
     
 <script>
 import Head from '@/view/Head.vue'
+import CoursesNumOfDiffCredits from './charts/CoursesNumOfDiffCredits.vue';
 import CoursesSelectionCount from './charts/CoursesSelectionCount.vue';
 const xml2js = require('xml2js');
 
@@ -72,6 +74,7 @@ export default {
   components: {
     Head,
     CoursesSelectionCount,
+    CoursesNumOfDiffCredits,
   },
   mounted() {
     sessionStorage.setItem('acc', 'admin'); //TODO: 最后需要删除
@@ -80,7 +83,7 @@ export default {
   data() {
     return {
       account: '',
-      index: '',
+      index: 1,
     }
   },
   methods: {
@@ -94,7 +97,7 @@ export default {
     
 <style>
 .tac {
-  margin-left: 20px;
+  margin-left: 37px;
 }
 
 .navSide {
