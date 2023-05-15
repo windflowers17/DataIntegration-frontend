@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header>
+    <el-header style="margin-bottom: 20px">
       <div class="header">
         <h1 class="title">南京大学选课系统</h1>
         <span class="stuName">你好，
@@ -10,14 +10,15 @@
           type="text"
           class="courseLink"
           @click="showSelectedCourse"
+          v-if="this.in != 'ADMIN'"
         >查看已选课程</el-button>
       </div>
     </el-header>
-    <el-container>
+    <!-- <el-container>
       <el-main class="main">
         <router-view></router-view>
       </el-main>
-    </el-container>
+    </el-container> -->
   </el-container>
 </template>
 

@@ -22,6 +22,7 @@ import ASelectedCourses from '@/view/SelectedCoursesAView.vue'
 
 // admin
 import AdminLogin from '@/view/AdminLogin'
+import AdminView from '@/view/AdminView'
 
 Vue.use(VueRouter);
 
@@ -80,6 +81,10 @@ const router = new VueRouter({
         {
             path: '/admin-login',
             component: AdminLogin
+        },
+        {
+            path: '/admin',
+            component: AdminView
         }
     ]
 })

@@ -10,12 +10,12 @@
           class="login-form"
         >
           <el-form-item
-            label="学号"
-            prop="studentId"
+            label="账号"
+            prop="account"
           >
             <el-input
-              v-model="loginForm.studentId"
-              placeholder="请输入学号"
+              v-model="loginForm.account"
+              placeholder="请输入账号"
             ></el-input>
           </el-form-item>
           <el-form-item
@@ -47,12 +47,12 @@
     data() {
       return {
         loginForm: {
-          studentId: '',
+          account: '',
           password: ''
         },
         loginRules: {
-          studentId: [
-            { required: true, message: '请输入学号', trigger: 'blur' }
+          account: [
+            { required: true, message: '请输入账号', trigger: 'blur' }
           ],
           password: [
             { required: true, message: '请输入密码', trigger: 'blur' }
@@ -66,7 +66,7 @@
           if (valid) {
             // 处理登录逻辑，发送请求验证学号和密码是否匹配
             let form = {
-              '账户名': this.loginForm.studentId,
+              '账户名': this.loginForm.account,
               '密码': this.loginForm.password,
             }
             let xml = this.json2Xml(form);
@@ -89,7 +89,7 @@
                 let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
                 // let token = xmlDoc.getElementsByTagName('string')[3].innerHTML;
                 // console.log(token);
-                sessionStorage.setItem('acc', this.loginForm.studentId);
+                sessionStorage.setItem('acc', this.loginForm.account);
                 // sessionStorage.setItem('token', token);
                 alert('登录成功!');
                 this.$router.push('/a-course');

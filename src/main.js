@@ -6,11 +6,15 @@ import router from '@/router/index.js';
 
 import axios from 'axios';
 
+import echarts from 'echarts'
+
 
 import '@/assets/css/index.css'
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
+Vue.prototype.$echarts = echarts
+
 
 
 new Vue({
