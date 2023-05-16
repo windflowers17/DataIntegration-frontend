@@ -1,5 +1,27 @@
 <template>
   <div>
+    <div>
+    <el-select
+        v-model="selectedInstitute"
+        placeholder="请选择查看院系"
+      >
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        >
+        </el-option>
+      </el-select>
+      <el-input
+      v-model="cno"
+        placeholder="请输入课程编号" style="width:200px;"></el-input>
+      <el-button
+        type="primary"
+        @click="query"
+        class="queryButton"
+      >查询</el-button>
+    </div>
     <div style="width:600px;height:400px;">
       <div
         id="instituteCount"
@@ -13,6 +35,26 @@
 export default {
   data() {
     return {
+      options: [
+        {
+          value: 'A',
+          label: 'A学院'
+        },
+        {
+          value: 'B',
+          label: 'B学院'
+        },
+        {
+          value: 'C',
+          label: 'C学院'
+        },
+        {
+          value: 'ABC',
+          label: '所有学院'
+        },
+      ],
+      selectedInstitute: '',
+      cno:'',
       chart: '',
       opinion: ['A学院', 'B学院', 'C学院'],
       opinionData: [
@@ -70,7 +112,9 @@ export default {
         ]
       })
     },
+    query(){
 
+    },
   }
 }
 </script>
