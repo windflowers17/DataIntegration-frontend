@@ -9,7 +9,7 @@
       <el-col :span="5">
         <h1 style="margin-left: 22px;">查看图表</h1>
         <el-menu
-          default-active="1"
+          default-active="2"
           class="el-menu-vertical-demo"
         >
           <el-menu-item
@@ -89,7 +89,7 @@ export default {
   data() {
     return {
       account: '',
-      index: 1,
+      index: 2,
     }
   },
   methods: {

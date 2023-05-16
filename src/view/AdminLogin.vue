@@ -92,7 +92,7 @@
                 sessionStorage.setItem('acc', this.loginForm.account);
                 // sessionStorage.setItem('token', token);
                 alert('登录成功!');
-                this.$router.push('/a-course');
+                this.$router.push('/admin');
               }
             })
           } else {

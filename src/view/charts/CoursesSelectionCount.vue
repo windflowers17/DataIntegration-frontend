@@ -21,6 +21,7 @@
       @click="buttonChange('ALL')"
       style="margin-bottom: 20px;"
     >总体</el-button>
+    <h2>最受欢迎的课程：<span class="mostPopular">{{ this.mostPopularCourse }}</span>，人数：<span class="mostPopular">{{ this.mostPopularCourseCount }}</span></h2>
     <div
       class="echart"
       id="mychart"
@@ -32,15 +33,18 @@
 
 <script>
 import * as echarts from "echarts";
+import { AGetCoursesSelectionCount, BGetCoursesSelectionCount, CGetCoursesSelectionCount, ALLGetCoursesSelectionCount } from '@/network/courses';
 
 export default {
   data() {
     return {
-      xData: ["数据集成", "Linux程序设计", "软件系统设计", "软件工程与计算Ⅰ", "软件工程与计算Ⅱ", "操作系统", "数据结构"], //横坐标
-      yData: [23, 24, 18, 25, 27, 28, 25], //数据
+      xData: [], //横坐标
+      yData: [], //数据
       myChartStyle: { float: "left", width: "800px", height: "500px" }, //图表样式
       selectedScale: 'A', //当前查看的范围
-      titleText: 'A学院-课程人数分布情况'
+      titleText: 'A学院-课程人数分布情况',
+      mostPopularCourse: '', //最受欢迎课程
+      mostPopularCourseCount: '', //最受欢迎课程的选课人数
     };
   },
   mounted() {
@@ -62,7 +66,7 @@ export default {
             showMaxLabel: true,
             interval: 0,
             rotate: 35,
-            fontSize:'16'
+            fontSize: '16'
           },
         },
 
@@ -106,16 +110,73 @@ export default {
       });
     },
     buttonChange(scale) {
+      this.xData = []
+      this.yData = []
       switch (scale) {
-        case 'A': this.selectedScale = 'A'; this.titleText = 'A学院-课程人数分布情况'; break;
-        case 'B': this.selectedScale = 'B'; this.titleText = 'B学院-课程人数分布情况'; break;
-        case 'C': this.selectedScale = 'C'; this.titleText = 'C学院-课程人数分布情况'; break;
-        case 'ALL': this.selectedScale = 'ALL'; this.titleText = '所有学院-课程人数分布情况'
+        case 'A': this.selectedScale = 'A';
+          this.titleText = 'A学院-课程人数分布情况';
+          this.getCoursesSelectionCount_A();
+          break;
+        case 'B': this.selectedScale = 'B';
+          this.titleText = 'B学院-课程人数分布情况';
+          this.getCoursesSelectionCount_B();
+          break;
+        case 'C': this.selectedScale = 'C';
+          this.titleText = 'C学院-课程人数分布情况';
+          this.getCoursesSelectionCount_C();
+          break;
+        case 'ALL': this.selectedScale = 'ALL';
+          this.titleText = '所有学院-课程人数分布情况';
+          this.getCoursesSelectionCount_ALL();
+
       }
+    },
+    /**
+     * 获得课程选课人数分布
+     */
+    getCoursesSelectionCount_A() {
+      AGetCoursesSelectionCount().then(res => {
+        this.setData(res);
+      })
+    },
+    getCoursesSelectionCount_B() {
+      BGetCoursesSelectionCount().then(res => {
+        this.setData(res);
+      })
+    },
+    getCoursesSelectionCount_C() {
+      CGetCoursesSelectionCount().then(res => {
+        console.log(res);
+        this.setData(res);
+      })
+    },
+    getCoursesSelectionCount_ALL() {
+      ALLGetCoursesSelectionCount().then(res => {
+        this.setData(res);
+      })
+    },
+    setData(res) {
+      this.courseParse(res);
       this.initEcharts();
     },
+    /**
+     * 以:为分隔符解析字符串（如："操作系统:42"），得到课程名称和人数, list最后一项为最受欢迎的课程
+     */
+    courseParse(list) {
+      for (let i = 0; i < list.length - 1; ++i) {
+        let item = list[i].split(':');
+        this.xData.push(item[0]);
+        this.yData.push(item[1]);
+      }
+      let mostPopularItem = list[list.length - 1].split(":");
+      this.mostPopularCourse = mostPopularItem[0];
+      this.mostPopularCourseCount = mostPopularItem[1];
+    }
   }
 };
 </script>
 <style>
+.mostPopular {
+  color: #FFA500;
+}
 </style>

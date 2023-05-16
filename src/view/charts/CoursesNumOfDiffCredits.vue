@@ -31,18 +31,13 @@
 </template>
 
 <script>
+import { AGetCoursesNumOfDiffCredits, BGetCoursesNumOfDiffCredits, CGetCoursesNumOfDiffCredits, ALLGetCoursesNumOfDiffCredits } from '@/network/courses'
 export default {
   data() {
     return {
       chart: '',
-      opinion: ['1学分' ,'2学分', '3学分', '4学分', '5学分'],
-      opinionData: [
-        { value: 1, name: '1学分', itemStyle: '#FF6384' },
-        { value: 9, name: '2学分', itemStyle: '#36A2EB' },
-        { value: 5, name: '3学分', itemStyle: '#FFCE56' },
-        { value: 3, name: '4学分', itemStyle: '#4BC0C0' },
-        { value: 2, name: '5学分', itemStyle: '#E84393' },
-      ],
+      opinion: ['3学分', '4学分', '5学分'],
+      opinionData: [],
       selectedScale: 'A', //当前查看的范围
       titleText: 'A学院-课程学分分布情况'
     }
@@ -95,10 +90,10 @@ export default {
                   }
                 },
                 color: function (params) {
-                // 自定义颜色
-                var colorList = ['#FF6384', '#1ab394', '#36A2EB', '#FFCE56', '#4BC0C0', '#E84393']
-                return colorList[params.dataIndex]
-              }
+                  // 自定义颜色
+                  var colorList = ['#36A2EB', '#FFCE56', '#FF6384', '#E84393']
+                  return colorList[params.dataIndex]
+                }
               },
             }
           }
@@ -106,15 +101,60 @@ export default {
       })
     },
     buttonChange(scale) {
+      this.opinionData = [];
       switch (scale) {
-        case 'A': this.selectedScale = 'A'; this.titleText = 'A学院-课程学分分布情况'; break;
-        case 'B': this.selectedScale = 'B'; this.titleText = 'B学院-课程学分分布情况'; break;
-        case 'C': this.selectedScale = 'C'; this.titleText = 'C学院-课程学分分布情况'; break;
-        case 'ALL': this.selectedScale = 'ALL'; this.titleText = '所有学院-课程学分分布情况'
+        case 'A': this.selectedScale = 'A';
+          this.titleText = 'A学院-课程学分分布情况';
+          this.getCoursesNumOfDiffCredits_A();
+          break;
+        case 'B': this.selectedScale = 'B';
+          this.titleText = 'B学院-课程学分分布情况';
+          this.getCoursesNumOfDiffCredits_B();
+          break;
+        case 'C': this.selectedScale = 'C';
+          this.titleText = 'C学院-课程学分分布情况';
+          this.getCoursesNumOfDiffCredits_C();
+          break;
+        case 'ALL': this.selectedScale = 'ALL';
+          this.titleText = '所有学院-课程学分分布情况'
+          this.getCoursesNumOfDiffCredits_ALL();
+      }
+    },
+    /**
+     * A-获取不同学分的课程数量分布
+     * @param {学院} institude 
+     */
+    getCoursesNumOfDiffCredits_A() {
+      AGetCoursesNumOfDiffCredits().then(res => {
+        this.setData(res);
+      })
+    },
+    getCoursesNumOfDiffCredits_B() {
+      BGetCoursesNumOfDiffCredits().then(res => {
+        this.setData(res);
+      })
+    },
+    getCoursesNumOfDiffCredits_C() {
+      CGetCoursesNumOfDiffCredits().then(res => {
+        this.setData(res);
+      })
+    },
+    getCoursesNumOfDiffCredits_ALL() {
+      ALLGetCoursesNumOfDiffCredits().then(res => {
+        this.setData(res);
+      })
+    },
+    setData(res) {
+      for (let i = 0; i < res.length; ++i) {
+        let item = {
+          value: res[i],
+          name: (i + 3) + '学分',
+        }
+        console.log(item);
+        this.opinionData.push(item);
       }
       this.drawLine();
-    },
-
+    }
   }
 }
 </script>

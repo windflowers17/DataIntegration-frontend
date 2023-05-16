@@ -49,6 +49,19 @@ const GET_ALL_COURSES_A = REQUEST_BASE_URL_ABC + '/integration/AshowAllcourses'
 // A从集成服务器获取所有已选课程信息
 const GET_ALL_SELECTED_COURSES_A = REQUEST_BASE_URL_ABC + '/integration/AaskCourse'
 
+// ADMIN
+// 1. 不同课程选课人数分布
+const GET_COURSES_SELECTION_COUNT_A = REQUEST_BASE_URL_ABC + '/integration/AgetMostPopularCourse'
+const GET_COURSES_SELECTION_COUNT_B = REQUEST_BASE_URL_ABC + '/integration/BgetMostPopularCourse'
+const GET_COURSES_SELECTION_COUNT_C = REQUEST_BASE_URL_ABC + '/integration/CgetMostPopularCourse'
+const GET_COURSES_SELECTION_COUNT_ALL = REQUEST_BASE_URL_ABC + '/integration/getMostPopularCourse'
+
+// 2. 不同学分课程分布
+const GET_COURSES_NUM_OF_DIFF_CREDITS_C = REQUEST_BASE_URL_ABC + '/integration/CgetCreditDistribution'
+const GET_COURSES_NUM_OF_DIFF_CREDITS_B = REQUEST_BASE_URL_ABC + '/integration/BgetCreditDistribution'
+const GET_COURSES_NUM_OF_DIFF_CREDITS_A = REQUEST_BASE_URL_ABC + '/integration/AgetCreditDistribution'
+const GET_COURSES_NUM_OF_DIFF_CREDITS_ALL = REQUEST_BASE_URL_ABC + '/integration/getCreditDistribution'
+
 module.exports = {
     // C
     ALL_COURSES_FROM_C,
@@ -75,5 +88,17 @@ module.exports = {
     DROP_COURSE_A,
     GET_ALL_COURSES_A,
     GET_ALL_SELECTED_COURSES_A,
+
+    // ADMIN
+    // 1
+    GET_COURSES_SELECTION_COUNT_A,
+    GET_COURSES_SELECTION_COUNT_B,
+    GET_COURSES_SELECTION_COUNT_C,
+    GET_COURSES_SELECTION_COUNT_ALL,
+    // 2
+    GET_COURSES_NUM_OF_DIFF_CREDITS_C,
+    GET_COURSES_NUM_OF_DIFF_CREDITS_B,
+    GET_COURSES_NUM_OF_DIFF_CREDITS_A,
+    GET_COURSES_NUM_OF_DIFF_CREDITS_ALL,
 
 };
