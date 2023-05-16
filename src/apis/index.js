@@ -62,6 +62,17 @@ const GET_COURSES_NUM_OF_DIFF_CREDITS_B = REQUEST_BASE_URL_ABC + '/integration/B
 const GET_COURSES_NUM_OF_DIFF_CREDITS_A = REQUEST_BASE_URL_ABC + '/integration/AgetCreditDistribution'
 const GET_COURSES_NUM_OF_DIFF_CREDITS_ALL = REQUEST_BASE_URL_ABC + '/integration/getCreditDistribution'
 
+//3. 课程选课学生院系分布
+const GET_STUDENT_DISTRIBUTION_A = REQUEST_BASE_URL_ABC + '/integration/AgetStudentDistribution'
+const GET_STUDENT_DISTRIBUTION_B = REQUEST_BASE_URL_ABC + '/integration/BgetStudentDistribution'
+const GET_STUDENT_DISTRIBUTION_C = REQUEST_BASE_URL_ABC + '/integration/CgetStudentDistribution'
+const GET_STUDENT_DISTRIBUTION_ALL = REQUEST_BASE_URL_ABC + '/integration/getStudentDistribution'
+
+//4. 课程成绩分布
+const GET_GRADE_DISTRIBUTION_A = REQUEST_BASE_URL_ABC + '/integration/AgetGradeDistribution'
+const GET_GRADE_DISTRIBUTION_B = REQUEST_BASE_URL_ABC + '/integration/BgetGradeDistribution'
+const GET_GRADE_DISTRIBUTION_C = REQUEST_BASE_URL_ABC + '/integration/CgetGradeDistribution'
+const GET_GRADE_DISTRIBUTION_ALL = REQUEST_BASE_URL_ABC + '/integration/getGradeDistribution'
 module.exports = {
     // C
     ALL_COURSES_FROM_C,
@@ -100,5 +111,14 @@ module.exports = {
     GET_COURSES_NUM_OF_DIFF_CREDITS_B,
     GET_COURSES_NUM_OF_DIFF_CREDITS_A,
     GET_COURSES_NUM_OF_DIFF_CREDITS_ALL,
-
+    //3
+    GET_STUDENT_DISTRIBUTION_A,
+    GET_STUDENT_DISTRIBUTION_B,
+    GET_STUDENT_DISTRIBUTION_C,
+    GET_STUDENT_DISTRIBUTION_ALL,
+    //4
+    GET_GRADE_DISTRIBUTION_A,
+    GET_GRADE_DISTRIBUTION_B,
+    GET_GRADE_DISTRIBUTION_C,
+    GET_GRADE_DISTRIBUTION_ALL,
 };

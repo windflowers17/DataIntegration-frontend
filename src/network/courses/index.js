@@ -38,3 +38,15 @@ export const AGetCoursesNumOfDiffCredits = config => request._get(API.GET_COURSE
 export const BGetCoursesNumOfDiffCredits = config => request._get(API.GET_COURSES_NUM_OF_DIFF_CREDITS_B, config);
 export const CGetCoursesNumOfDiffCredits = config => request._get(API.GET_COURSES_NUM_OF_DIFF_CREDITS_C, config);
 export const ALLGetCoursesNumOfDiffCredits = config => request._get(API.GET_COURSES_NUM_OF_DIFF_CREDITS_ALL, config);
+
+//3
+export const getStudentDistributionFromA = config => request._get(API.GET_STUDENT_DISTRIBUTION_A, config);
+export const getStudentDistributionFromB = config => request._get(API.GET_STUDENT_DISTRIBUTION_B, config);
+export const getStudentDistributionFromC = config => request._get(API.GET_STUDENT_DISTRIBUTION_C, config);
+export const getStudentDistributionFromAll = config => request._get(API.GET_STUDENT_DISTRIBUTION_ALL, config);
+
+//4
+export const getGradeDistributionFromA = config => request._get(API.GET_GRADE_DISTRIBUTION_A, config);
+export const getGradeDistributionFromB = config => request._get(API.GET_GRADE_DISTRIBUTION_B, config);
+export const getGradeDistributionFromC = config => request._get(API.GET_GRADE_DISTRIBUTION_C, config);
+export const getGradeDistributionFromAll = config => request._get(API.GET_GRADE_DISTRIBUTION_ALL, config);

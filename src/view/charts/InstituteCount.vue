@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { getStudentDistributionFromA, getStudentDistributionFromB, getStudentDistributionFromC, getStudentDistributionFromAll } from '@/network/courses/index.js';
+
 export default {
   data() {
     return {
@@ -58,15 +60,12 @@ export default {
       chart: '',
       opinion: ['A学院', 'B学院', 'C学院'],
       opinionData: [
-        { value: 1, name: 'A学院', itemStyle: '#FF6384' },
-        { value: 9, name: 'B学院', itemStyle: '#36A2EB' },
-        { value: 5, name: 'C学院', itemStyle: '#FFCE56' },
+        // { value: 1, name: 'A学院',  },
+        // { value: 9, name: 'B学院',  },
+        // { value: 5, name: 'C学院',  },
       ],
       titleText: '选课学生院系分布情况'
     }
-  },
-  mounted: function () {
-    this.drawLine()
   },
   methods: {
     drawLine() {
@@ -113,8 +112,39 @@ export default {
       })
     },
     query(){
-
+      this.opinionData=[];
+      let config = {
+        cno : cno,
+      };
+      if (this.selectedInstitute === 'A') {
+        getStudentDistributionFromA(config).then(res => {
+          this.setData(res);
+        })
+      }
+      else if (this.selectedInstitute === 'B') {
+        getStudentDistributionFromB(config).then(res => {
+          this.setData(res);
+        })
+      }
+      else if (this.selectedInstitute === 'C') {
+        getStudentDistributionFromC(config).then(res => {
+          this.setData(res);
+        })
+      }
+      else if (this.selectedInstitute === 'ABC') {
+        getStudentDistributionFromAll(config).then(res => {
+          this.setData(res);
+        })
+      }
+      this.drawLine();
     },
+    setData(res) {
+      this.opinionData = [
+        { value: res[0], name: 'A学院',  },
+        { value: res[1], name: 'B学院',  },
+        { value: res[2], name: 'C学院',  },
+      ];
+    }
   }
 }
 </script>

@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { getGradeDistributionFromA, getGradeDistributionFromB, getGradeDistributionFromC, getGradeDistributionFromAll } from '@/network/courses/index.js';
+
 export default {
   data() {
     return {
@@ -58,15 +60,12 @@ export default {
       chart: '',
       opinion: ['60分以下', '60-90分', '90分以上'],
       opinionData: [
-        { value: 1, name: '60分以下', itemStyle: '#FF6384' },
-        { value: 9, name: '60-90分', itemStyle: '#36A2EB' },
-        { value: 5, name: '90分以上', itemStyle: '#FFCE56' },
+        // { value: 1, name: '60分以下', },
+        // { value: 9, name: '60-90分',  },
+        // { value: 5, name: '90分以上',  },
       ],
       titleText: '课程成绩分布情况'
     }
-  },
-  mounted: function () {
-    this.drawLine()
   },
   methods: {
     drawLine() {
@@ -113,8 +112,39 @@ export default {
       })
     },
     query(){
-
+      this.opinionData=[];
+      let config = {
+        cno : cno,
+      };
+      if (this.selectedInstitute === 'A') {
+        getGradeDistributionFromA(config).then(res => {
+          this.setData(res);
+        })
+      }
+      else if (this.selectedInstitute === 'B') {
+        getGradeDistributionFromB(config).then(res => {
+          this.setData(res);
+        })
+      }
+      else if (this.selectedInstitute === 'C') {
+        getGradeDistributionFromC(config).then(res => {
+          this.setData(res);
+        })
+      }
+      else if (this.selectedInstitute === 'ABC') {
+        getGradeDistributionFromAll(config).then(res => {
+          this.setData(res);
+        })
+      }
+      this.drawLine();
     },
+    setData(res) {
+      this.opinionData = [
+        { value: res[0], name: '60分以下',  },
+        { value: res[1], name: '60-90分',  },
+        { value: res[2], name: '90分以上',  },
+      ];
+    }
   }
 }
 </script>
