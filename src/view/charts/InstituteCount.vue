@@ -14,7 +14,7 @@
         </el-option>
       </el-select>
       <el-input
-      v-model="cno"
+      v-model="course"
         placeholder="请输入课程编号" style="width:200px;"></el-input>
       <el-button
         type="primary"
@@ -56,7 +56,7 @@ export default {
         },
       ],
       selectedInstitute: '',
-      cno:'',
+      course:'',
       chart: '',
       opinion: ['A学院', 'B学院', 'C学院'],
       opinionData: [
@@ -113,30 +113,36 @@ export default {
     },
     query(){
       this.opinionData=[];
+      let cnumber=this.course;
       let config = {
-        cno : cno,
-      };
+        params: {
+          cno: cnumber
+        }
+      }
       if (this.selectedInstitute === 'A') {
         getStudentDistributionFromA(config).then(res => {
           this.setData(res);
+          this.drawLine();
         })
       }
       else if (this.selectedInstitute === 'B') {
         getStudentDistributionFromB(config).then(res => {
           this.setData(res);
+          this.drawLine();
         })
       }
       else if (this.selectedInstitute === 'C') {
         getStudentDistributionFromC(config).then(res => {
           this.setData(res);
+          this.drawLine();
         })
       }
       else if (this.selectedInstitute === 'ABC') {
         getStudentDistributionFromAll(config).then(res => {
           this.setData(res);
+          this.drawLine();
         })
       }
-      this.drawLine();
     },
     setData(res) {
       this.opinionData = [
