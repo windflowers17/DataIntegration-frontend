@@ -1,9 +1,10 @@
 <template>
   <div>
-  <div>
-    <el-select
+    <div>
+      <el-select
         v-model="selectedInstitute"
-        placeholder="请选择查看院系"
+        placeholder="院系"
+        style="margin-right: 10px;width:113px"
       >
         <el-option
           v-for="item in options"
@@ -14,18 +15,20 @@
         </el-option>
       </el-select>
       <el-input
-      v-model="course"
-        placeholder="请输入课程编号" style="width:200px;"></el-input>
+        v-model="course"
+        placeholder="课程编号"
+        style="width:120px;"
+      ></el-input>
       <el-button
         type="primary"
         @click="query"
         class="queryButton"
       >查询</el-button>
     </div>
-    <div style="width:600px;height:400px;">
+    <div style="width:600px;height:400px;margin-top: 20px;">
       <div
         id="gradeCount"
-        style="width:100%;height:278px;float:left;"
+        style="width:100%;height:400px;float:left;"
       ></div>
     </div>
   </div>
@@ -56,7 +59,7 @@ export default {
         },
       ],
       selectedInstitute: '',
-      course:'',
+      course: '',
       chart: '',
       opinion: ['60分以下', '60-90分', '90分以上'],
       opinionData: [
@@ -81,12 +84,16 @@ export default {
         },
         tooltip: {
           trigger: 'item',
-          formatter: '{a} <br/>{b} : {c} ({d}%)'
+          formatter: '{a} <br/>{b} : {c} ({d}%)',
+          fontSize: 16,
         },
         legend: {
           orient: 'vertical',
           bottom: 'bottom',
-          data: this.opinion
+          data: this.opinion,
+          textStyle: {
+            fontSize: 16,
+          }
         },
         series: [
           {
@@ -101,19 +108,26 @@ export default {
                 shadowOffsetX: 0,
                 shadowColor: 'rgba(0, 0, 0, 0.5)'
               },
-              color: function (params) {
-                // 自定义颜色
-                var colorList = ['#FF6384', '#1ab394','#36A2EB','#FFCE56','#4BC0C0','#E84393']
-                return colorList[params.dataIndex]
-              }
+              normal: {
+                label: {
+                  textStyle: {
+                    fontSize: 16
+                  },
+                },
+                color: function (params) {
+                  // 自定义颜色
+                  var colorList = ['#36A2EB', '#FFCE56', '#FF6384', '#E84393']
+                  return colorList[params.dataIndex]
+                }
+              },
             }
           }
         ]
       })
     },
-    query(){
-      this.opinionData=[];
-      let cnumber=this.course;
+    query() {
+      this.opinionData = [];
+      let cnumber = this.course;
       let config = {
         params: {
           cno: cnumber
@@ -146,9 +160,9 @@ export default {
     },
     setData(res) {
       this.opinionData = [
-        { value: res[0], name: '60分以下',  },
-        { value: res[1], name: '60-90分',  },
-        { value: res[2], name: '90分以上',  },
+        { value: res[0], name: '60分以下', },
+        { value: res[1], name: '60-90分', },
+        { value: res[2], name: '90分以上', },
       ];
     }
   }

@@ -7,9 +7,9 @@
     ></Head>
     <el-row class="tac">
       <el-col :span="5">
-        <h1 style="margin-left: 22px;">查看图表</h1>
+        <h1 style="margin-left: 22px;">数据分析</h1>
         <el-menu
-          default-active="2"
+          default-active="1"
           class="el-menu-vertical-demo"
         >
           <el-menu-item
@@ -19,7 +19,7 @@
           >
             <template slot="title">
               <i class="el-icon-s-data"></i>
-              <span>最受欢迎课程</span>
+              <span>课程选课人数分布</span>
             </template>
           </el-menu-item>
           <el-menu-item
@@ -29,7 +29,7 @@
           >
             <template slot="title">
               <i class="el-icon-s-data"></i>
-              <span>不同学分课程的数量分布</span>
+              <span>各学分课程数量分布</span>
             </template>
           </el-menu-item>
           <el-menu-item
@@ -39,7 +39,7 @@
           >
             <template slot="title">
               <i class="el-icon-s-data"></i>
-              <span>课程的选课学生院系分布</span>
+              <span>课程选课学生院系分布</span>
             </template>
           </el-menu-item>
           <el-menu-item
@@ -89,7 +89,7 @@ export default {
   data() {
     return {
       account: '',
-      index: 2,
+      index: 1,
     }
   },
   methods: {
