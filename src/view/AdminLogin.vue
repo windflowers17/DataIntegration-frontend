@@ -63,9 +63,10 @@
     methods: {
       login() {
         if(this.loginForm.account === 'admin' && this.loginForm.password === '123456') {
+          sessionStorage.setItem('acc', 'admin'); //TODO: 最后需要删除
           alert('登录成功！');
           this.$router.push('/admin');
-        }else {
+        } else {
           alert('密码错误！');
         }
         // this.$refs.loginForm.validate(valid => {

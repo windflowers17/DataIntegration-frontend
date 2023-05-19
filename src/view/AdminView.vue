@@ -83,7 +83,6 @@ export default {
     GradeCount,
   },
   mounted() {
-    sessionStorage.setItem('acc', 'admin'); //TODO: 最后需要删除
     this.account = sessionStorage.getItem('acc');
   },
   data() {
