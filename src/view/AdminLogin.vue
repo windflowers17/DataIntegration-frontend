@@ -62,43 +62,49 @@
     },
     methods: {
       login() {
-        this.$refs.loginForm.validate(valid => {
-          if (valid) {
-            // 处理登录逻辑，发送请求验证学号和密码是否匹配
-            let form = {
-              '账户名': this.loginForm.account,
-              '密码': this.loginForm.password,
-            }
-            let xml = this.json2Xml(form);
-            console.log(xml);
-            let config = {
-              params: {
-                userAccountXml: xml
-              }
-            }
-            ALoginCheck(config).then(res => {
-              console.log(res);
-              let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
-              let map = xmlDoc.getElementsByTagName('string');
-              // console.log(map);
-              if (map.length == 2) {
-                alert('账户不存在，请先注册！');
-                //TODO:跳转注册
-              }
-              else {
-                let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
-                // let token = xmlDoc.getElementsByTagName('string')[3].innerHTML;
-                // console.log(token);
-                sessionStorage.setItem('acc', this.loginForm.account);
-                // sessionStorage.setItem('token', token);
-                alert('登录成功!');
-                this.$router.push('/admin');
-              }
-            })
-          } else {
-            console.log('表单校验失败');
-          }
-        });
+        if(this.loginForm.account === 'admin' && this.loginForm.password === '123456') {
+          alert('登录成功！');
+          this.$router.push('/admin');
+        }else {
+          alert('密码错误！');
+        }
+        // this.$refs.loginForm.validate(valid => {
+        //   if (valid) {
+        //     // 处理登录逻辑，发送请求验证学号和密码是否匹配
+        //     let form = {
+        //       '账户名': this.loginForm.account,
+        //       '密码': this.loginForm.password,
+        //     }
+        //     let xml = this.json2Xml(form);
+        //     console.log(xml);
+        //     let config = {
+        //       params: {
+        //         userAccountXml: xml
+        //       }
+        //     }
+        //     ALoginCheck(config).then(res => {
+        //       console.log(res);
+        //       let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
+        //       let map = xmlDoc.getElementsByTagName('string');
+        //       // console.log(map);
+        //       if (map.length == 2) {
+        //         alert('账户不存在，请先注册！');
+        //         //TODO:跳转注册
+        //       }
+        //       else {
+        //         let xmlDoc = new DOMParser().parseFromString(res, 'text/xml');
+        //         // let token = xmlDoc.getElementsByTagName('string')[3].innerHTML;
+        //         // console.log(token);
+        //         sessionStorage.setItem('acc', this.loginForm.account);
+        //         // sessionStorage.setItem('token', token);
+        //         alert('登录成功!');
+        //         this.$router.push('/admin');
+        //       }
+        //     })
+        //   } else {
+        //     console.log('表单校验失败');
+        //   }
+        // });
       },
       json2Xml(json) {
         let builder = new xml2js.Builder();

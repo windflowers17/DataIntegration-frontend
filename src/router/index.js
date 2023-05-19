@@ -24,6 +24,8 @@ import ASelectedCourses from '@/view/SelectedCoursesAView.vue'
 import AdminLogin from '@/view/AdminLogin'
 import AdminView from '@/view/AdminView'
 
+import Identify from '@/view/Identify'
+
 Vue.use(VueRouter);
 
 
@@ -32,7 +34,7 @@ const router = new VueRouter({
     routes: [
         {
             path: '/',
-            redirect: '/c-login'
+            redirect: '/identify'
         },
         // CC
         {
@@ -85,6 +87,11 @@ const router = new VueRouter({
         {
             path: '/admin',
             component: AdminView
+        },
+        // Identify
+        {
+            path: '/identify',
+            component: Identify
         }
     ]
 })
