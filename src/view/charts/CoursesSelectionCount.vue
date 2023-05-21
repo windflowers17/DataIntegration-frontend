@@ -48,7 +48,7 @@ export default {
     };
   },
   mounted() {
-    this.initEcharts();
+    this.getCoursesSelectionCount_A();
   },
   methods: {
     initEcharts() {
